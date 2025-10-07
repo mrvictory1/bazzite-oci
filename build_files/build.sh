@@ -12,7 +12,7 @@ set -ouex pipefail
 # this installs a package from fedora repos
 # dnf5 install -y tmux 
 # cd ~
-dnf install dkms
+dnf -y install dkms
 git clone https://github.com/frankcrawford/it87.git
 cd it87
 make dkms
