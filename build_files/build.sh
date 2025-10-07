@@ -14,11 +14,11 @@ set -ouex pipefail
 # cd ~
 git clone https://github.com/frankcrawford/it87.git
 cd it87
-sudo make dkms
-sudo touch /etc/modprobe.d/it87.conf && sudo echo "options it87 ignore_resource_conflict=1" | sudo tee /etc/modprobe.d/it87.conf
-sudo touch /etc/modules-load.d/it87.conf && sudo echo "it87" | sudo tee /etc/modules-load.d/it87.conf
-sudo dracut --regenerate-all --force
-sudo modprobe -r it87 && sudo modprobe it87 ignore_resource_conflict=1
+make dkms
+touch /etc/modprobe.d/it87.conf && sudo echo "options it87 ignore_resource_conflict=1" | sudo tee /etc/modprobe.d/it87.conf
+touch /etc/modules-load.d/it87.conf && sudo echo "it87" | sudo tee /etc/modules-load.d/it87.conf
+dracut --regenerate-all --force
+modprobe -r it87 && sudo modprobe it87 ignore_resource_conflict=1
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
