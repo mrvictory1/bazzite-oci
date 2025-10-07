@@ -12,11 +12,10 @@ set -ouex pipefail
 # this installs a package from fedora repos
 # dnf5 install -y tmux 
 # cd ~
+dnf install dkms
 git clone https://github.com/frankcrawford/it87.git
 cd it87
-make clean
-make
-make install
+make dkms
 touch /etc/modprobe.d/it87.conf && echo "options it87 ignore_resource_conflict=1" | tee /etc/modprobe.d/it87.conf
 touch /etc/modules-load.d/it87.conf && echo "it87" | tee /etc/modules-load.d/it87.conf
 dracut --regenerate-all --force
