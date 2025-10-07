@@ -14,7 +14,7 @@ set -ouex pipefail
 # cd ~
 git clone https://github.com/frankcrawford/it87.git
 cd it87
-make dkms
+make V=1 dkms
 touch /etc/modprobe.d/it87.conf && sudo echo "options it87 ignore_resource_conflict=1" | sudo tee /etc/modprobe.d/it87.conf
 touch /etc/modules-load.d/it87.conf && sudo echo "it87" | sudo tee /etc/modules-load.d/it87.conf
 dracut --regenerate-all --force
