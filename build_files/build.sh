@@ -10,8 +10,15 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
-
+# dnf5 install -y tmux 
+# cd ~
+git clone https://github.com/frankcrawford/it87.git
+cd it87
+sudo make dkms
+sudo touch /etc/modprobe.d/it87.conf && sudo echo "options it87 ignore_resource_conflict=1" | sudo tee /etc/modprobe.d/it87.conf
+sudo touch /etc/modules-load.d/it87.conf && sudo echo "it87" | sudo tee /etc/modules-load.d/it87.conf
+sudo dracut --regenerate-all --force
+sudo modprobe -r it87 && sudo modprobe it87 ignore_resource_conflict=1
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
